@@ -41,18 +41,18 @@ public class KafkaConfig {
 	  @Bean
 	  public Map<String, Object> producerConfigs() {
 	    Map<String, Object> props = new HashMap<>();
-	    // list of host:port pairs used for establishing the initial connections to the Kakfa cluster
-	    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-	        bootstrapServers);
-	    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-	        StringSerializer.class);
+
+	    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+	    props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 	    props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+
 	    return props;
 	  }
 	  
 	  @Bean
 	  public Map<String, Object> consumerConfigs() {
 	    Map<String, Object> props = new HashMap<>();
+
 	    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
 	    props.put(ConsumerConfig.GROUP_ID_CONFIG, "helloworld");
 	    return props;
@@ -67,11 +67,10 @@ public class KafkaConfig {
 	  public KafkaTemplate<String, Model> kafkaTemplate() {
 	    return new KafkaTemplate<>(producerFactory());
 	  }
-	  
+
 	  @Bean
 	  public ReplyingKafkaTemplate<String, Model, Model> replyKafkaTemplate(ProducerFactory<String, Model> pf, KafkaMessageListenerContainer<String, Model> container){
 		  return new ReplyingKafkaTemplate<>(pf, container);
-		  
 	  }
 	  
 	  @Bean

@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 import com.gauravg.model.Model;
 
 
-@Component
+//@Component
 public class ReplyingKafkaConsumer {
 	 
-	 @KafkaListener(topics = "${kafka.topic.request-topic}")
-	 @SendTo
-	  public Model listen(Model request) throws InterruptedException {
-		 
-		 int sum = request.getFirstNumber() + request.getSecondNumber();
-		 request.setAdditionalProperty("sum", sum);
-		 return request;
-	  }
+//	 @KafkaListener(topics = "${kafka.topic.request-topic}")
+//	 @SendTo
+//	  public Model listen(Model request) throws InterruptedException {
+//
+//		 int sum = request.getFirstNumber() + request.getSecondNumber();
+//		 request.setAdditionalProperty("sum", sum);
+//		 return request;
+//	  }
 
 }

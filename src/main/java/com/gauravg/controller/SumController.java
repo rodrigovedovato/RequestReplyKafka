@@ -45,12 +45,19 @@ public class SumController {
 		SendResult<String, Model> sendResult = sendAndReceive.getSendFuture().get();
 		
 		//print all headers
-		sendResult.getProducerRecord().headers().forEach(header -> System.out.println(header.key() + ":" + header.value().toString()));
+//		sendResult.getProducerRecord().headers().forEach(header -> System.out.println(header.key() + ":" + header.value().toString()));
 		
 		// get consumer record
 		ConsumerRecord<String, Model> consumerRecord = sendAndReceive.get();
 		// return consumer value
 		return consumerRecord.value();		
+	}
+
+	@ResponseBody
+	@PostMapping(value="/sum-simple",produces=MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public Model sumSimple(@RequestBody Model request) {
+		request.setAdditionalProperty("sum", request.getFirstNumber() + request.getSecondNumber() + 2);
+		return request;
 	}
 
 }
